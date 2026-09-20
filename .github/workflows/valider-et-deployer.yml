@@ -104,17 +104,26 @@ jobs:
           fi
           echo "aucun secret, aucun média."
 
-      # Les deux pages reçues : langue, titre, et la réparation de la PWA branchée.
+      # Les pages reçues : la PWA est obligatoire ; la page pack est optionnelle
+      # car exclue du dépôt (asset de licence).
       - name: Pages reçues — français, titre du studio, PWA réparée
         run: |
-          for f in canal-vectoriel/pwa-arkadia.html canal-vectoriel/pack-vtuber-arkadia.html; do
+          verifier_page() {
+            f="$1"
             test -s "$f" || { echo "⛔ manquant ou vide : $f"; exit 1; }
             grep -q 'lang="fr-FR"' "$f" || { echo "⛔ $f n'est pas déclaré en français"; exit 1; }
             if grep -q '<title>React Artifact</title>' "$f"; then
               echo "⛔ $f porte encore le titre du générateur"; exit 1
             fi
             echo "ok  $f"
-          done
+          }
+
+          verifier_page canal-vectoriel/pwa-arkadia.html
+          if [ -s canal-vectoriel/pack-vtuber-arkadia.html ]; then
+            verifier_page canal-vectoriel/pack-vtuber-arkadia.html
+          else
+            echo "info: canal-vectoriel/pack-vtuber-arkadia.html absent (exclu du dépôt)."
+          fi
 
           # La réparation : le script doit exister ET être branché, et les deux fichiers
           # qu'il rétablit doivent être servis au même niveau que la page.
