@@ -1,0 +1,153 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080" role="img" aria-label="Bannière du Canal Arkadia — cinq blocs du flux vectoriel">
+  <title>GL Digital Lab — Canal Arkadia — Espace factoriel vectoriel</title>
+  <desc>Bannière 16:9 entièrement vectorielle : client, proxy, tunnel, local, live.</desc>
+
+  <defs>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00f0ff"/>
+      <stop offset="100%" stop-color="#ff00a0"/>
+    </linearGradient>
+    <pattern id="grille" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#00f0ff" stroke-width="0.6" opacity="0.13"/>
+    </pattern>
+    <radialGradient id="haloHaut" cx="50%" cy="0%" r="70%">
+      <stop offset="0%" stop-color="#00f0ff" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#00f0ff" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .mono  { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; }
+      .titre { font-family: "Segoe UI", system-ui, sans-serif; font-weight: 800; }
+      .corps { font-family: "Segoe UI", system-ui, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1920" height="1080" fill="#0a0a14"/>
+  <rect width="1920" height="1080" fill="url(#grille)"/>
+  <rect width="1920" height="620" fill="url(#haloHaut)"/>
+
+  <!-- en-tête -->
+  <g>
+    <rect x="60" y="52" width="64" height="64" rx="12" fill="#00f0ff"/>
+    <text x="92" y="98" text-anchor="middle" class="titre" font-size="26" fill="#0a0a14">AGI</text>
+    <text x="148" y="84" class="mono" font-size="17" letter-spacing="6" fill="#00f0ff">CANAL</text>
+    <text x="148" y="112" class="titre" font-size="30" fill="#ffffff" letter-spacing="2">ARKADIA</text>
+
+    <text x="1860" y="84" text-anchor="end" class="titre" font-size="34" fill="#ffffff" letter-spacing="1">GL DIGITAL LAB</text>
+    <text x="1860" y="112" text-anchor="end" class="mono" font-size="16" fill="#ff00a0" letter-spacing="4">ESPACE FACTORIEL VECTORIEL</text>
+  </g>
+
+  <line x1="60" y1="152" x2="1860" y2="152" stroke="url(#accent)" stroke-width="2" opacity="0.75"/>
+
+  <!-- sous-titre du flux -->
+  <text x="960" y="196" text-anchor="middle" class="mono" font-size="19" letter-spacing="7" fill="#00f0ff" opacity="0.85">
+    FLUX VECTORIEL — CLIENT · PROXY · TUNNEL · LOCAL · LIVE
+  </text>
+
+  <!-- cinq blocs -->
+  <g class="corps">
+    <!-- 01 CLIENT -->
+    <g transform="translate(60,236)">
+      <rect width="336" height="470" rx="14" fill="#11111f" stroke="#00f0ff" stroke-width="1.6"/>
+      <rect width="336" height="6" rx="3" fill="#00f0ff"/>
+      <text x="24" y="60" class="mono" font-size="15" letter-spacing="4" fill="#00f0ff">BLOC 01</text>
+      <text x="24" y="98" class="titre" font-size="30" fill="#ffffff">CLIENT</text>
+      <text x="24" y="128" class="mono" font-size="15" fill="#ff00a0">NAVIGATEUR</text>
+      <line x1="24" y1="150" x2="312" y2="150" stroke="#00f0ff" stroke-width="0.6" opacity="0.35"/>
+      <text x="24" y="188" class="mono" font-size="15" fill="#c8d4e0">WebAudio · micro</text>
+      <text x="24" y="216" class="mono" font-size="15" fill="#c8d4e0">chat JS</text>
+      <text x="24" y="244" class="mono" font-size="15" fill="#c8d4e0">embeddings 1536 d</text>
+      <text x="24" y="272" class="mono" font-size="15" fill="#c8d4e0">avatar · visèmes</text>
+      <text x="24" y="446" class="mono" font-size="14" fill="#00f0ff" opacity="0.7">aucune image externe</text>
+    </g>
+
+    <!-- 02 PROXY -->
+    <g transform="translate(434,236)">
+      <rect width="336" height="470" rx="14" fill="#11111f" stroke="#00f0ff" stroke-width="1.6"/>
+      <rect width="336" height="6" rx="3" fill="#aaff00"/>
+      <text x="24" y="60" class="mono" font-size="15" letter-spacing="4" fill="#aaff00">BLOC 02</text>
+      <text x="24" y="98" class="titre" font-size="30" fill="#ffffff">PROXY</text>
+      <text x="24" y="128" class="mono" font-size="15" fill="#ff00a0">BOT.PHP</text>
+      <line x1="24" y1="150" x2="312" y2="150" stroke="#00f0ff" stroke-width="0.6" opacity="0.35"/>
+      <text x="24" y="188" class="mono" font-size="15" fill="#c8d4e0">signature HMAC</text>
+      <text x="24" y="216" class="mono" font-size="15" fill="#c8d4e0">quota par IP</text>
+      <text x="24" y="244" class="mono" font-size="15" fill="#c8d4e0">cache de vecteurs</text>
+      <text x="24" y="272" class="mono" font-size="15" fill="#c8d4e0">journal : durées seules</text>
+      <text x="24" y="446" class="mono" font-size="14" fill="#aaff00" opacity="0.7">latence visée &lt; 40 ms</text>
+    </g>
+
+    <!-- 03 TUNNEL -->
+    <g transform="translate(808,236)">
+      <rect width="336" height="470" rx="14" fill="#11111f" stroke="#00f0ff" stroke-width="1.6"/>
+      <rect width="336" height="6" rx="3" fill="#ff00a0"/>
+      <text x="24" y="60" class="mono" font-size="15" letter-spacing="4" fill="#ff00a0">BLOC 03</text>
+      <text x="24" y="98" class="titre" font-size="30" fill="#ffffff">TUNNEL</text>
+      <text x="24" y="128" class="mono" font-size="15" fill="#ff00a0">CLOUDFLARE</text>
+      <line x1="24" y1="150" x2="312" y2="150" stroke="#00f0ff" stroke-width="0.6" opacity="0.35"/>
+      <text x="24" y="188" class="mono" font-size="15" fill="#c8d4e0">URL publique unique</text>
+      <text x="24" y="216" class="mono" font-size="15" fill="#c8d4e0">Chroma / FAISS</text>
+      <text x="24" y="244" class="mono" font-size="15" fill="#c8d4e0">RAG actif</text>
+      <text x="24" y="272" class="mono" font-size="15" fill="#c8d4e0">cosine · 1536 d</text>
+      <text x="24" y="446" class="mono" font-size="14" fill="#ff00a0" opacity="0.7">sortie : conclusions seules</text>
+    </g>
+
+    <!-- 04 LOCAL -->
+    <g transform="translate(1182,236)">
+      <rect width="336" height="470" rx="14" fill="#11111f" stroke="#00f0ff" stroke-width="1.6"/>
+      <rect width="336" height="6" rx="3" fill="#aaff00"/>
+      <text x="24" y="60" class="mono" font-size="15" letter-spacing="4" fill="#aaff00">BLOC 04</text>
+      <text x="24" y="98" class="titre" font-size="30" fill="#ffffff">LOCAL</text>
+      <text x="24" y="128" class="mono" font-size="15" fill="#ff00a0">MACHINE EVA-01</text>
+      <line x1="24" y1="150" x2="312" y2="150" stroke="#00f0ff" stroke-width="0.6" opacity="0.35"/>
+      <text x="24" y="188" class="mono" font-size="15" fill="#c8d4e0">cerveau local (Ollama)</text>
+      <text x="24" y="216" class="mono" font-size="15" fill="#c8d4e0">voix locale (Piper)</text>
+      <text x="24" y="244" class="mono" font-size="15" fill="#c8d4e0">MCP · fichiers · RAG</text>
+      <text x="24" y="272" class="mono" font-size="15" fill="#c8d4e0">un seul job GPU</text>
+      <text x="24" y="446" class="mono" font-size="14" fill="#aaff00" opacity="0.7">rien ne sort sans décision</text>
+    </g>
+
+    <!-- 05 LIVE -->
+    <g transform="translate(1556,236)">
+      <rect width="304" height="470" rx="14" fill="#11111f" stroke="#00f0ff" stroke-width="1.6"/>
+      <rect width="304" height="6" rx="3" fill="#ff00a0"/>
+      <text x="24" y="60" class="mono" font-size="15" letter-spacing="4" fill="#ff00a0">BLOC 05</text>
+      <text x="24" y="98" class="titre" font-size="30" fill="#ffffff">LIVE</text>
+      <text x="24" y="128" class="mono" font-size="15" fill="#ff00a0">VITRINE</text>
+      <line x1="24" y1="150" x2="280" y2="150" stroke="#00f0ff" stroke-width="0.6" opacity="0.35"/>
+      <text x="24" y="188" class="mono" font-size="15" fill="#c8d4e0">OBS · source navigateur</text>
+      <text x="24" y="216" class="mono" font-size="15" fill="#c8d4e0">chat → JSON → voix</text>
+      <text x="24" y="244" class="mono" font-size="15" fill="#c8d4e0">!arkadia → overlay</text>
+      <text x="24" y="272" class="mono" font-size="15" fill="#c8d4e0">1080p60</text>
+      <text x="24" y="446" class="mono" font-size="14" fill="#ff00a0" opacity="0.7">24/7</text>
+    </g>
+  </g>
+
+  <!-- flèches entre les blocs -->
+  <g stroke="url(#accent)" stroke-width="3" opacity="0.8">
+    <line x1="400" y1="471" x2="430" y2="471"/>
+    <line x1="774" y1="471" x2="804" y2="471"/>
+    <line x1="1148" y1="471" x2="1178" y2="471"/>
+    <line x1="1522" y1="471" x2="1552" y2="471"/>
+  </g>
+  <g fill="#ff00a0">
+    <polygon points="430,464 442,471 430,478"/>
+    <polygon points="804,464 816,471 804,478"/>
+    <polygon points="1178,464 1190,471 1178,478"/>
+    <polygon points="1552,464 1564,471 1552,478"/>
+  </g>
+
+  <!-- bandeau bas -->
+  <line x1="60" y1="760" x2="1860" y2="760" stroke="#00f0ff" stroke-width="1" opacity="0.3"/>
+  <text x="60" y="812" class="mono" font-size="18" letter-spacing="5" fill="#00f0ff">EXTENSION DU TERRITOIRE</text>
+  <text x="60" y="856" class="titre" font-size="40" fill="#ffffff">ACTIVATION DU DOMAINE</text>
+  <text x="60" y="896" class="titre" font-size="40" fill="#ff00a0">VITRINE 24/7</text>
+
+  <text x="1860" y="822" text-anchor="end" class="mono" font-size="16" fill="#c8d4e0">tunnel chiffré · mémoire persistante</text>
+  <text x="1860" y="852" text-anchor="end" class="mono" font-size="16" fill="#c8d4e0">latence · censure = les adversaires</text>
+  <text x="1860" y="882" text-anchor="end" class="mono" font-size="16" fill="#c8d4e0">activation : !arkadia</text>
+
+  <!-- pied -->
+  <line x1="60" y1="968" x2="1860" y2="968" stroke="#ffffff" stroke-width="0.8" opacity="0.14"/>
+  <circle cx="72" cy="1016" r="7" fill="#00ff88"/>
+  <text x="94" y="1023" class="mono" font-size="16" fill="#c8d4e0">100 % VECTORIEL — SVG PUR, AUCUNE IMAGE EXTERNE, IMPRIMABLE, 16:9</text>
+  <text x="1860" y="1023" text-anchor="end" class="mono" font-size="16" fill="#c8d4e0">GL DIGITAL LAB · EVA-01 · 20/09/2026</text>
+</svg>

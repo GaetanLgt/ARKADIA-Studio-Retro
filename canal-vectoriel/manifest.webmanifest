@@ -1,0 +1,51 @@
+{
+  "name": "Canal Arkadia — Espace factoriel vectoriel",
+  "short_name": "Canal Arkadia",
+  "description": "Vitrine vectorielle du studio : flux client, proxy, tunnel, local, live. GL Digital Lab.",
+  "lang": "fr-FR",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "id": "canal-arkadia-vectoriel",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "browser"],
+  "orientation": "landscape",
+  "background_color": "#0a0a14",
+  "theme_color": "#00f0ff",
+  "categories": ["productivity", "developer", "graphics"],
+  "icons": [
+    {
+      "src": "./icone.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./icone-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./arkadia-banniere.svg",
+      "sizes": "1920x1080",
+      "type": "image/svg+xml",
+      "form_factor": "wide",
+      "label": "Bannière vectorielle 16:9 — cinq blocs du flux"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Bannière 16:9",
+      "short_name": "Bannière",
+      "url": "./index.html?vue=banniere"
+    },
+    {
+      "name": "Infographie des blocs",
+      "short_name": "Infographie",
+      "url": "./infographie.html"
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Canal Arkadia — Espace factoriel vectoriel</title>
+  <meta name="description" content="Vitrine vectorielle du studio : client, proxy, tunnel, local, live.">
+  <meta name="theme-color" content="#0a0a14">
+  <meta name="color-scheme" content="dark">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="./icone.svg">
+  <link rel="apple-touch-icon" href="./icone.svg">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <style>
+    :root { --fond: #0a0a14; --cyan: #00f0ff; --magenta: #ff00a0; --texte: #c8d4e0; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: var(--fond); color: var(--texte); }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      display: flex; flex-direction: column; min-height: 100dvh;
+    }
+    /* La bannière garde son 16:9 quoi qu'il arrive : OBS la capture telle quelle. */
+    #scene { flex: 1; display: flex; align-items: center; justify-content: center; padding: 0; }
+    #scene img { width: 100%; height: auto; max-height: 100dvh; display: block; }
+    footer {
+      display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; justify-content: space-between;
+      padding: .6rem 1rem; border-top: 1px solid rgba(0, 240, 255, .18);
+      font-family: ui-monospace, Consolas, monospace; font-size: 12px; letter-spacing: .06em;
+    }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    button {
+      font: inherit; letter-spacing: .1em; cursor: pointer;
+      padding: .5rem .9rem; border-radius: 8px;
+      background: var(--cyan); color: #05070d; border: 0; font-weight: 700;
+    }
+    button[hidden] { display: none; }
+    .etat { opacity: .65; }
+    @media print {
+      body { background: #fff; }
+      footer { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main id="scene">
+    <!-- La bannière est le produit : un SVG, donc net à toutes les tailles. -->
+    <img src="./arkadia-banniere.svg" alt="Bannière du Canal Arkadia : cinq blocs du flux vectoriel" width="1920" height="1080">
+  </main>
+
+  <footer>
+    <span class="etat" id="etat">hors ligne · coquille mise en cache</span>
+    <span>
+      <a href="./infographie.html">infographie des blocs</a>
+      &nbsp;·&nbsp;
+      <a href="./arkadia-banniere.svg" download="arkadia-banniere.svg">télécharger le SVG</a>
+    </span>
+    <button id="installer" hidden>INSTALLER</button>
+  </footer>
+
+  <script>
+    /* PWA : enregistrement du service worker + bouton d'installation.
+       Rien ici ne parle à un service : la coquille ne sert que l'affichage. */
+    const elEtat = document.getElementById('etat');
+    const elInstaller = document.getElementById('installer');
+    let invite = null;
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js')
+          .then(() => {
+            elEtat.textContent = navigator.onLine
+              ? 'en ligne · coquille prête hors ligne'
+              : 'hors ligne · servie par le cache';
+          })
+          .catch((e) => { elEtat.textContent = 'service worker refusé : ' + e.message; });
+      });
+    } else {
+      elEtat.textContent = 'service worker absent de ce navigateur';
+    }
+
+    window.addEventListener('online',  () => { elEtat.textContent = 'en ligne · coquille prête hors ligne'; });
+    window.addEventListener('offline', () => { elEtat.textContent = 'hors ligne · servie par le cache'; });
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      invite = e;
+      elInstaller.hidden = false;
+    });
+
+    elInstaller.addEventListener('click', async () => {
+      if (!invite) return;
+      invite.prompt();
+      await invite.userChoice;
+      invite = null;
+      elInstaller.hidden = true;
+    });
+  </script>
+</body>
+</html>
