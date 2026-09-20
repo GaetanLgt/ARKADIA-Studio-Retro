@@ -1,0 +1,168 @@
+# Intégration continue et déploiement — Canal Arkadia
+#
+# GL Digital Lab · 20/09/2026 · EVA-01
+#
+# ⚠️ NON ÉPROUVÉ : ce fichier n'a jamais tourné. Il n'a pas encore été poussé
+# sur un dépôt où l'onglet Actions est actif, et aucun des secrets qu'il attend
+# n'existe à ce jour. La validation ci-dessous est rejouable à la main, et c'est
+# elle qui fait foi ; le déploiement, lui, attend les identifiants (§ DEPLOIEMENT.md).
+#
+# Principe, et il gouverne tout le reste : LE DÉPLOIEMENT EST ARMÉ EXPLICITEMENT.
+# La variable de dépôt `DEPLOIEMENT_ACTIF` doit valoir exactement « oui ». Sans
+# elle, la CI valide et s'arrête — elle ne pousse rien. Un dépôt qui déploie par
+# défaut est un dépôt qui déploie un jour où personne ne regardait.
+
+name: valider et déployer
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'canal-vectoriel/**'
+      - '.github/workflows/valider-et-deployer.yml'
+  pull_request:
+    paths:
+      - 'canal-vectoriel/**'
+  workflow_dispatch:
+
+# Un seul déploiement à la fois, et on ne coupe pas celui qui tourne.
+concurrency:
+  group: deploiement-canal-arkadia
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  # ── ① VALIDER — sans réseau, sans secret, et ça tourne sur toute machine ────
+  valider:
+    name: valider (syntaxe, décision, manifeste)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Installer PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+
+      - name: Installer Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Syntaxe de bot.php
+        run: php -l canal-vectoriel/bot.php
+
+      - name: Syntaxe du service worker et du connecteur
+        run: |
+          node --check canal-vectoriel/service-worker.js
+          node --check canal-vectoriel/connecteur-live.mjs
+
+      - name: Manifeste lisible et complet
+        run: |
+          # ⚠️ `require()` sur un `.webmanifest` ÉCHOUE : l'extension n'est pas
+          # reconnue comme un module, Node tente de l'évaluer comme du JavaScript
+          # et rend « SyntaxError: Unexpected token ':' ». Constaté en rejouant
+          # l'étape à la main le 20/09/2026 — cette étape aurait échoué au premier
+          # lancement de la CI. On lit donc le fichier, et on analyse le JSON.
+          node -e '
+            const fs = require("node:fs");
+            const m = JSON.parse(fs.readFileSync("canal-vectoriel/manifest.webmanifest", "utf8"));
+            const requis = ["name", "short_name", "start_url", "display", "icons"];
+            const manquants = requis.filter((c) => !(c in m));
+            if (manquants.length) { console.error("champs absents : " + manquants.join(", ")); process.exit(1); }
+            if (!Array.isArray(m.icons) || m.icons.length === 0) { console.error("aucune icône"); process.exit(1); }
+            console.log("manifeste : " + m.name + " · " + m.icons.length + " icône(s)");
+          '
+
+      - name: Les fichiers du pack existent tous
+        run: |
+          for f in index.html manifest.webmanifest service-worker.js arkadia-banniere.svg icone.svg icone-maskable.svg README.md; do
+            test -s "canal-vectoriel/$f" || { echo "manquant ou vide : $f"; exit 1; }
+            echo "ok  $f"
+          done
+
+      # L'épreuve de décision du connecteur, dans les DEUX configurations.
+      # C'est le contrôle qui compte : il prouve que le refus par défaut fonctionne.
+      - name: Décision du connecteur — liste garnie
+        env:
+          ARKADIA_AUTORISES: gaetan,inconnu
+        run: node canal-vectoriel/connecteur-live.mjs --essai
+
+      - name: Décision du connecteur — liste VIDE (tout doit être refusé)
+        run: node canal-vectoriel/connecteur-live.mjs --essai
+
+      - name: Aucun secret ni média dans le pack
+        run: |
+          if grep -rIl -E '(BEGIN [A-Z ]*PRIVATE KEY|sk-[A-Za-z0-9]{20,}|ghp_[A-Za-z0-9]{20,})' canal-vectoriel/ ; then
+            echo "⛔ une valeur qui ressemble à un secret est présente dans le pack"; exit 1
+          fi
+          if find canal-vectoriel -type f \( -name '*.mp4' -o -name '*.mp3' -o -name '*.wav' \) | grep -q . ; then
+            echo "⛔ un média est présent dans le pack"; exit 1
+          fi
+          echo "aucun secret, aucun média."
+
+  # ── ② DÉPLOYER — armé par une variable, jamais par défaut ──────────────────
+  deployer:
+    name: déployer (gldigitallab.fr)
+    needs: valider
+    runs-on: ubuntu-latest
+    # `vars` est lisible ici ; `secrets` ne l'est pas de façon fiable dans un `if`.
+    # Donc l'armement passe par une VARIABLE, et les identifiants par des SECRETS.
+    if: github.ref == 'refs/heads/master' && vars.DEPLOIEMENT_ACTIF == 'oui'
+    environment:
+      name: production
+      url: https://gldigitallab.fr/
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Vérifier que les identifiants sont là
+        env:
+          HOTE: ${{ secrets.DEPLOIEMENT_HOTE }}
+          UTILISATEUR: ${{ secrets.DEPLOIEMENT_UTILISATEUR }}
+          MOT_DE_PASSE: ${{ secrets.DEPLOIEMENT_MOT_DE_PASSE }}
+          CHEMIN: ${{ secrets.DEPLOIEMENT_CHEMIN }}
+        run: |
+          manquant=0
+          for n in HOTE UTILISATEUR MOT_DE_PASSE CHEMIN; do
+            if [ -z "${!n}" ]; then echo "secret absent : DEPLOIEMENT_$n"; manquant=1; fi
+          done
+          [ "$manquant" -eq 0 ] || { echo "⛔ déploiement non armé complètement — on s'arrête."; exit 1; }
+          echo "identifiants présents (valeurs jamais affichées)."
+
+      - name: Installer lftp
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: Pousser le pack (miroir, SANS suppression)
+        env:
+          HOTE: ${{ secrets.DEPLOIEMENT_HOTE }}
+          UTILISATEUR: ${{ secrets.DEPLOIEMENT_UTILISATEUR }}
+          MOT_DE_PASSE: ${{ secrets.DEPLOIEMENT_MOT_DE_PASSE }}
+          CHEMIN: ${{ secrets.DEPLOIEMENT_CHEMIN }}
+        run: |
+          # ⚠️ `--delete` est DÉLIBÉRÉMENT absent : le dossier distant peut porter
+          # des fichiers que le studio a posés à la main, ou qu'un autre chantier
+          # y a déposés. Un miroir qui supprime fait du CI le propriétaire d'un
+          # dossier partagé — et la première surprise serait un fichier disparu
+          # sans que personne ne l'ait demandé. Si une suppression est nécessaire,
+          # elle se décide, elle ne s'automatise pas.
+          lftp -c "
+            set ssl:verify-certificate yes;
+            set net:max-retries 3;
+            set net:timeout 20;
+            open -u '$UTILISATEUR','$MOT_DE_PASSE' '$HOTE';
+            mirror -R --verbose --parallel=2 --only-newer \
+              canal-vectoriel/ '$CHEMIN';
+            bye
+          "
+
+      - name: Contrôle après coup — la page répond
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 30 https://gldigitallab.fr/ || echo 000)
+          echo "HTTP $code"
+          if [ "$code" != "200" ]; then
+            echo "⛔ la page ne répond pas 200 après déploiement — à regarder avant de crier victoire."
+            exit 1
+          fi
