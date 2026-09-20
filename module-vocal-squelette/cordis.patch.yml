@@ -1,0 +1,6 @@
+# dsh-voix-locale — greffon du profil web.
+# Insère la ligne de greffon dans la pile de couches du profil.
+# Même forme que dsh-comfyui/cordis.patch.yml et dsh-sysmon/cordis.patch.yml.
+- insert:
+    - id: voix-locale
+      name: 'dsh-voix-locale'

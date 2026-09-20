@@ -1,0 +1,35 @@
+{
+  "name": "dsh-voix-locale",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bouton micro dans l'interface du harnais : capture navigateur, transcription locale via 127.0.0.1:8150, insertion directe dans la conversation.",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "files": [
+    "lib",
+    "client",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22.19.0"
+  },
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./client/client.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ],
+      "platform": "web",
+      "immediately": true
+    }
+  }
+}

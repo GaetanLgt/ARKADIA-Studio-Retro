@@ -1,0 +1,58 @@
+# Dépendances / build
+node_modules/
+.pnpm-store/
+dist/
+build/
+*.log
+
+# Environnement / secrets
+.env
+.env.*
+*.pem
+*.key
+*.crt
+.secrets/
+
+# Cache / temp
+*.tmp
+*.temp
+.cache/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+Thumbs.db
+.DS_Store
+ehthumbs.db
+Desktop.ini
+
+# Modèles / poids (gros fichiers binaires)
+*.bin
+*.gguf
+*.onnx
+*.pt
+*.pth
+*.safetensors
+*.model
+
+# Données volumineuses (hors repo)
+data/
+datasets/
+*.sqlite3
+*.db
+
+# Spécifique studio
+deepseek-harness/
+GL-OS_v1/
+MND/
+*.whisper.vtt
+*.fr.vtt
+*.txt
+downloads/
