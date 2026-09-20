@@ -4,6 +4,24 @@ node_modules/
 dist/
 build/
 *.log
+.venv/
+venv/
+env/
+
+# ⛔ Médias — jamais dans un dépôt public.
+# Raison juridique avant la raison de taille : un fichier audio ou vidéo repris
+# d'une œuvre protégée (musique, générique, extrait) n'a rien à faire ici, même
+# en dépôt privé — un dépôt peut devenir public en un clic, l'historique reste.
+*.mp4
+*.mkv
+*.mov
+*.avi
+*.webm
+*.mp3
+*.wav
+*.flac
+*.m4a
+*.ogg
 
 # Environnement / secrets
 .env
