@@ -104,17 +104,26 @@ jobs:
           fi
           echo "aucun secret, aucun média."
 
-      # Les deux pages reçues : langue, titre, et la réparation de la PWA branchée.
+      # Les pages reçues : langue, titre, et la réparation de la PWA branchée.
+      #
+      # ⛔ CORRIGÉ LE 20/09/2026 — CETTE ÉTAPE FAISAIT ÉCHOUER LE JOB, ET C'ÉTAIT MA FAUTE.
+      # Mesuré : exécution 35535255311, 11 étapes vertes, celle-ci rouge, job « valider » en
+      # échec. Reproduit sur un clone neuf du dépôt public.
+      # La cause : la boucle EXIGEAIT `pack-vtuber-arkadia.html` — un fichier que j'ai
+      # moi-même EXCLU du dépôt (avatar en base64 de 2,2 Mo, dérivé d'une franchise
+      # protégée ; voir canal-vectoriel/PAGES-RECUES.md § 5). En intégration continue il
+      # n'est donc pas là, et l'exiger condamnait l'étape. *Un contrôle qui réclame un
+      # fichier qu'on a décidé de ne pas versionner ne contrôle rien : il échoue.*
       - name: Pages reçues — français, titre du studio, PWA réparée
         run: |
-          for f in canal-vectoriel/pwa-arkadia.html canal-vectoriel/pack-vtuber-arkadia.html; do
-            test -s "$f" || { echo "⛔ manquant ou vide : $f"; exit 1; }
-            grep -q 'lang="fr-FR"' "$f" || { echo "⛔ $f n'est pas déclaré en français"; exit 1; }
-            if grep -q '<title>React Artifact</title>' "$f"; then
-              echo "⛔ $f porte encore le titre du générateur"; exit 1
-            fi
-            echo "ok  $f"
-          done
+          # La page PWA est versionnée : elle est EXIGÉE.
+          f=canal-vectoriel/pwa-arkadia.html
+          test -s "$f" || { echo "⛔ manquant ou vide : $f"; exit 1; }
+          grep -q 'lang="fr-FR"' "$f" || { echo "⛔ $f n'est pas déclaré en français"; exit 1; }
+          if grep -q '<title>React Artifact</title>' "$f"; then
+            echo "⛔ $f porte encore le titre du générateur"; exit 1
+          fi
+          echo "ok  $f"
 
           # La réparation : le script doit exister ET être branché, et les deux fichiers
           # qu'il rétablit doivent être servis au même niveau que la page.
@@ -124,6 +133,20 @@ jobs:
           test -s canal-vectoriel/manifest.webmanifest
           test -s canal-vectoriel/service-worker.js
           echo "réparation PWA : script présent, branché, et ses deux cibles présentes."
+
+          # ⚠️ LA PAGE DU PACK EST EXCLUE DU DÉPÔT, DÉLIBÉRÉMENT. Donc ici elle n'est PAS là :
+          # on la contrôle SI elle est présente, et on écrit noir sur blanc quand elle ne l'est
+          # pas — pour qu'un lecteur futur ne prenne pas son absence pour un oubli.
+          g=canal-vectoriel/pack-vtuber-arkadia.html
+          if [ -s "$g" ]; then
+            grep -q 'lang="fr-FR"' "$g" || { echo "⛔ $g n'est pas déclaré en français"; exit 1; }
+            if grep -q '<title>React Artifact</title>' "$g"; then
+              echo "⛔ $g porte encore le titre du générateur"; exit 1
+            fi
+            echo "ok  $g (présente : contrôlée)"
+          else
+            echo "absent — exclusion délibérée, décision en attente : $g (non contrôlée)"
+          fi
 
           # ⚠️ VÉRIFICATION ÉCARTÉE, ET C'EST DÉLIBÉRÉ : chercher la chaîne
           # « data:application/manifest » dans la page. Le CODE du générateur est
