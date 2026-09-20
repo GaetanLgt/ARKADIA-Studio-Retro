@@ -74,3 +74,21 @@ MND/
 *.fr.vtt
 *.txt
 downloads/
+
+# ── Pages reçues : ce qui reste HORS du dépôt, et pourquoi ─────────────────
+# ⛔ pack-vtuber-arkadia.html (2,3 Mo) embarque l'avatar en base64 — un PNG de 2,2 Mo
+#    dérivé d'une franchise protégée. La même frontière que le nom du personnage :
+#    un asset de licence n'entre pas dans un livrable du studio, et un dépôt public
+#    est le pire endroit pour le découvrir. Le fichier reste sur le disque, servi et
+#    déployable ; seule sa présence dans l'historique Git est refusée. Décision à
+#    Gaëtan — l'exclusion tombe le jour où l'avatar est produit par le studio.
+canal-vectoriel/pack-vtuber-arkadia.html
+
+# Les sauvegardes « avant correction » : utiles sur le disque, redondantes en dépôt
+# (les fichiers d'origine restent intacts dans ~/.dsh/attachments/, en lecture seule).
+*.avant-correction-2026-09-20
+
+# La page de conversation d'un tiers (balisage + 241 scripts qui ne sont pas à nous) :
+# c'est une SOURCE, pas un livrable.
+*.htm
+canal-vectoriel/pack/

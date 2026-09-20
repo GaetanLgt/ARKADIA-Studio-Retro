@@ -104,6 +104,35 @@ jobs:
           fi
           echo "aucun secret, aucun média."
 
+      # Les deux pages reçues : langue, titre, et la réparation de la PWA branchée.
+      - name: Pages reçues — français, titre du studio, PWA réparée
+        run: |
+          for f in canal-vectoriel/pwa-arkadia.html canal-vectoriel/pack-vtuber-arkadia.html; do
+            test -s "$f" || { echo "⛔ manquant ou vide : $f"; exit 1; }
+            grep -q 'lang="fr-FR"' "$f" || { echo "⛔ $f n'est pas déclaré en français"; exit 1; }
+            if grep -q '<title>React Artifact</title>' "$f"; then
+              echo "⛔ $f porte encore le titre du générateur"; exit 1
+            fi
+            echo "ok  $f"
+          done
+
+          # La réparation : le script doit exister ET être branché, et les deux fichiers
+          # qu'il rétablit doivent être servis au même niveau que la page.
+          test -s canal-vectoriel/correction-pwa.js
+          grep -q 'correction-pwa.js' canal-vectoriel/pwa-arkadia.html \
+            || { echo "⛔ la correction PWA n'est plus branchée sur la page"; exit 1; }
+          test -s canal-vectoriel/manifest.webmanifest
+          test -s canal-vectoriel/service-worker.js
+          echo "réparation PWA : script présent, branché, et ses deux cibles présentes."
+
+          # ⚠️ VÉRIFICATION ÉCARTÉE, ET C'EST DÉLIBÉRÉ : chercher la chaîne
+          # « data:application/manifest » dans la page. Le CODE du générateur est
+          # toujours là — la correction retire l'EFFET, pas le code. Un contrôle qui
+          # échouerait toujours ne contrôle rien : ce serait une panne déguisée en
+          # exigence. Ce qui est vérifié ici est ce qui doit être vrai : la page est en
+          # français, elle porte un titre du studio, sa réparation est branchée, et ses
+          # deux cibles existent.
+
   # ── ② DÉPLOYER — armé par une variable, jamais par défaut ──────────────────
   deployer:
     name: déployer (gldigitallab.fr)
