@@ -92,3 +92,14 @@ canal-vectoriel/pack-vtuber-arkadia.html
 # c'est une SOURCE, pas un livrable.
 *.htm
 canal-vectoriel/pack/
+
+# ── ⛔ Dossiers nominatifs : HORS du dépôt tant que sa visibilité n'est pas tranchée ──
+# Mesuré le 20/09/2026 : une requête sans authentification sur raw.githubusercontent.com
+# rend HTTP 200 — ce dépôt est PUBLIC, et l'historique l'est aussi. Les documents qui
+# portent une identité, une commune, un SIREN/SIRET ou un rattachement AGEFIPH n'ont rien
+# à y faire en lecture libre. Voir ALERTE-depot-public-et-donnees-nominatives-2026-09-20.md
+# dans 02-LE-DOSSIER-DU-28-SEPTEMBRE/ : le réglage « privé » et le rangement des dossiers
+# sont deux décisions distinctes, et elles appartiennent à Gaëtan.
+*.docx
+02-LE-DOSSIER-DU-28-SEPTEMBRE/*.docx
+01-LE-SAS-et-sa-structure/*.docx
