@@ -163,13 +163,114 @@
 
 ---
 
-## 📌 RÈGLES DE VIE DU DOCUMENT
+## 🌉 PONT PLURIDISCIPLINAIRE (POLYMATH) — Le polymath au cœur du studio
 
-1. **Versionné** : chaque modification = commit message explicite.
-2. **Source unique** : ce fichier = référence unique. Les autres fiches (Z-Image, Pont Live, etc.) sont des annexes.
-3. **Mise à jour** : au minimum hebdomadaire (vendredi 18h) ou à chaque décision majeure.
-4. **Non-négociable** : aucune hypothèse non marquée ; toute entrée = source ou statut explicite.
-5. **Révision trimestrielle** (stratégie) / mensuelle (tactique) / hebdo (opérationnel).
+> **Principe** : le studio ne produit pas que du code — il produit du **sens** à l'intersection de la technique, de l'art, du business, du droit, du cognitif, de l'éthique, du vivant. Chaque projet traverse ces dimensions ; **le polymath est le liant** qui empêche la fragmentation en silos.
+
+---
+
+## 🌉 PONT PLURIDISCIPLINAIRE — Architecture du Polymath
+
+### 1. Les 7 Piliers du Polymath (Dimensions transverses)
+
+| Pilier | Question clé | Indicateur de santé | Rituel de sync | Gardien |
+|---|---|---|---|---|
+| **Technique** (Code, Infra, IA, Infra) | « Est-ce que ça tourne ? » | Build passing, tests verts, VRAM < 80% | Standup tech 09:15 | Lead Tech |
+| **Artistique** (Visuel, Son, Narration, UX) | « Est-ce que ça résonne ? » | Feedback utilisateur > 4/5, itérations < 3 | Critique artistique hebdo | Lead Art |
+| **Business / Produit** | « Est-ce que ça vend / sert ? » | MRR, rétention, NPS, coût d'acquisition | Revue produit bimensuelle | PO / Business |
+| **Juridique / Conformité** | « Est-ce légal / éthique / conforme ? » | 0 incident juridique, conformité RGPD/AI Act | Revue juridique mensuelle | Legal / DPO |
+| **Cognitif / UX** | « Est-ce compréhensible / utilisable ? » | Taux de réussite tâche > 90%, temps tâche < seuil | Tests utilisateurs mensuels | UX / CogSci |
+| **Éthique / Impact** | « Est-ce que ça améliore le monde ? » | Audit éthique trimestriel, bilan carbone, accessibilité | Revue éthique trimestrielle | Ethics Officer |
+| **Vivant / Organisation** | « L'équipe va-t-elle bien ? » | eNPS > 40, turnover < 10%, 0 burnout | Rétro hebdo, 1:1 mensuels | People Ops / Lead |
+
+> **Règle** : *Aucun projet ne passe en production sans avoir été vu par les 7 piliers.* Le polymath valide le passage (checklist de passage).
+
+---
+
+### 2. Rituels de Synchronisation Polymath
+
+| Rituel | Fréquence | Participants | Durée | Livrable |
+|---|---|---|---|---|
+| **Sync Polymath Hebdo** | Lundi 09:30 | 7 gardiens + lead projet | 45 min | Décisions transverses, conflits résolus, arbitrages |
+| **Revue Projet 360°** | Mensuel | Équipe projet + 7 piliers | 90 min | Fiche 360° (technique, art, biz, legal, cog, éthique, org) |
+| **Atelier Polymath** | Trimestriel | Tout le studio | 1/2 journée | Exploration croisée (tech ↔ art, business ↔ éthique, etc.) |
+| **Rétro Polymath** | Fin de sprint | Équipe + 7 piliers | 60 min | Apprentissages transverses, améliorations systémiques |
+
+> **Règle** : *Un conflit entre piliers = escalade au polymath (arbitrage), pas en silo.*
+
+---
+
+### 3. Matrice de Compétences Polymath (Team Map)
+
+| Membre | Technique | Artistique | Business | Juridique | Cognitif | Éthique | Organisation | Score Polymath |
+|---|---|---|---|---|---|---|---|---|
+| Gaëtan | ●●●●● | ●●●●○ | ●●●●● | ●●●●○ | ●●●○○ | ●●●○○ | ●●●●● | 24/35 |
+| Samus (IA) | ●●●●● | ●●●○○ | ●●○○○ | ●●●○○ | ●●●●● | ●●●●● | ●●○○○ | 22/35 |
+| Lead Tech | ●●●●● | ●●○○○ | ●●○○○ | ●●○○○ | ●●●○○ | ●●○○○ | ●●●○○ | 18/35 |
+| Lead Art | ●●●○○ | ●●●●● | ●●○○○ | ●○○○○ | ●●●○○ | ●●●○○ | ●●○○○ | 17/35 |
+| Legal / DPO | ●○○○○ | ●○○○○ | ●●○○○ | ●●●●● | ●●○○○ | ●●●○○ | ●●○○○ | 14/35 |
+| UX / CogSci | ●●○○○ | ●●●○○ | ●●○○○ | ●○○○○ | ●●●●● | ●●●○○ | ●●○○○ | 17/35 |
+| Ethics Officer | ●○○○○ | ●●○○○ | ●○○○○ | ●●○○○ | ●●○○○ | ●●●●● | ●○○○○ | 13/35 |
+| People Ops | ●○○○○ | ●○○○○ | ●○○○○ | ●●○○○ | ●●○○○ | ●●●○○ | ●●●●● | 14/35 |
+
+> **Règle** : *Score polymath < 15 = recrutement / formation prioritaire. Score > 25 = candidat polymath senior.*
+
+---
+
+### 4. Projets Polymath — Exemples de Croisements
+
+| Projet | Technique | Artistique | Business | Juridique | Cognitif | Éthique | Org |
+|---|---|---|---|---|---|---|---|
+| **Z-Image** | ●●●●● | ●●●●● | ●●●○○ | ●●○○○ | ●●●○○ | ●●●○○ | ●●○○○ |
+| **Pont Live (Voix)** | ●●●●● | ●●●○○ | ●●○○○ | ●●●○○ | ●●●●● | ●●●○○ | ●●○○○ |
+| **Mistral Pack** | ●●●●● | ●●○○○ | ●●●●○ | ●●○○○ | ●●●○○ | ●●○○○ | ●●○○○ |
+| **Canal Vectoriel** | ●●●●● | ●●●○○ | ●●●●● | ●●●○○ | ●●●○○ | ●●○○○ | ●●●○○ |
+| **Formation Certifiée** | ●●●○○ | ●●●○○ | ●●●●● | ●●●●● | ●●●●● | ●●●●● | ●●●●● |
+| **Pack VTuber** | ●●●●● | ●●●●● | ●●●○○ | ●●○○○ | ●●●○○ | ●●○○○ | ●●○○○ |
+
+---
+
+### 5. Outils & Artefacts Polymath
+
+| Outil | Usage | Fréquence |
+|---|---|---|
+| **Fiche 360° Projet** | Template unique (Technique, Art, Biz, Legal, Cog, Ethique, Org) | À chaque démarrage projet |
+| **Checkpoint Polymath** | Checklist 7 piliers à chaque gate (Design Review, Code Review, Pre-Prod, Launch) | Gates |
+| **Tableau de Bord Polymath** | Dashboard unique (7 KPIs piliers + score polymath global) | Temps réel |
+| **Carnet Polymath** | Obsidian / Notion partagé — entrées datées, signées, liées | Continu |
+
+---
+
+## 🔒 GOUVERNANCE POLYMATH — RÈGLES NON NÉGOCIABLES
+
+| Règle | Sanction si violation |
+|---|---|
+| **Aucun projet ne passe en prod sans validation des 7 piliers** | Blocage déploiement + alerte polymath |
+| **Conflit inter-piliers = escalade polymath** (pas de résolution en silo) | Médiation polymath obligatoire |
+| **Score polymath < 15** = plan de développement / recrutement obligatoire | Plan d'action 30 jours |
+| **Revue polymath trimestrielle** = obligatoire | Alerte si non faite |
+| **Score polymath global < 20** = alerte direction | Audit externe |
+
+---
+
+## 📌 INTÉGRATION DANS LA FEUILLE DE ROUTE EXISTANTE
+
+> Le **Pont Pluridisciplinaire** n'est pas une couche de plus — c'est le **liant** qui traverse les 4 couches (Stratégie, Tactique, Opérationnel, Quotidien). Il s'active à chaque gate, chaque décision, chaque conflit.
+
+| Couche | Activation Polymath |
+|---|---|
+| **Stratégie** | Validation vision 360° (7 piliers) avant validation budget |
+| **Tactique** | Gates polymath aux jalons (Design Review, Pre-Prod, Launch) |
+| **Opérationnel** | Sync hebdo + checkpoints quotidiens (7 piliers) |
+| **Quotidien** | Standup polymath (15 min) — 7 gardiens, 15 min, blocages transverses |
+
+---
+
+*Ajouté le 22/09/2026 — Version 1.1 — GL Digital Lab · Samus (harnais), preset `metroid`.*
+
+---
+
+## 📌 RÈGLES DE VIE DU DOCUMENT
 
 ---
 
