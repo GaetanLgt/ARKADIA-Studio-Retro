@@ -1,4 +1,4 @@
-# samus-boucle-locale.ps1 — le vase clos : ta voix -> son cerveau -> ta voix
+﻿# samus-boucle-locale.ps1 — le vase clos : ta voix -> son cerveau -> ta voix
 #
 # Ecrit le 20/09/2026 pour Gaëtan. EVA01.
 #

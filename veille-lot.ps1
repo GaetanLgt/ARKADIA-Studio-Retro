@@ -1,4 +1,4 @@
-# veille-lot.ps1 — recuperer les sous-titres de veille EN LOT, sans se faire couper
+﻿# veille-lot.ps1 — recuperer les sous-titres de veille EN LOT, sans se faire couper
 #
 # Ecrit le 20/09/2026 apres un HTTP 429. Ce qui a change la donne :
 #
@@ -77,5 +77,8 @@ if ($rates.Count) { $rates | Set-Content -LiteralPath $fichierEchecs -Encoding U
 
 Write-Host ""
 Write-Host ("  Bilan : {0} recupere(s) · {1} deja la · {2} en echec" -f $ok, $skipped, $rates.Count) -ForegroundColor Cyan
-if ($rates.Count) { Write-Host "  Rates, a relancer plus tard : $($rates -join ' ')" -ForegroundColor Yellow
-                    Write-Host "  Ils sont dans veille-echecs.txt — le prochain lancement les reprend tout seuls." -ForegroundColor DarkGray }
+if ($rates.Count) {
+  $listeRates = $rates -join ' '
+  Write-Host "  Rates, a relancer plus tard : $listeRates" -ForegroundColor Yellow
+  Write-Host "  Ils sont dans veille-echecs.txt - le prochain lancement les reprend tout seuls." -ForegroundColor DarkGray
+}

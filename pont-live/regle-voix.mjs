@@ -59,7 +59,23 @@ export default {
     if (!corps.from || !prompt || !prompt.startsWith('!arkadia')) {
       return null; // pas la commande de chat du studio
     }
-    if (autorises.size > 0 && !autorises.has(auteur)) {
+
+    // ⛔ CORRIGÉ LE 21/09/2026 — DÉFAUT MESURÉ, ET IL ÉTAIT GRAVE.
+    //   La garde était écrite :  if (autorises.size > 0 && !autorises.has(auteur)) return null;
+    //   **Liste vide → la condition est fausse → personne n'est refusé.** Le commentaire
+    //   d'origine affirmait « la liste vide refuse tout, par construction » : le code disait
+    //   exactement l'inverse de sa propre documentation. Une porte ouverte, invisible à la
+    //   relecture rapide — *un commentaire faux est plus dangereux qu'une absence de commentaire.*
+    //   Mesure de la faute : `ARKADIA_AUTORISES=""` laissait passer n'importe quel `from`.
+    //   Le comportement juste, et c'est celui de tous les autres connecteurs du studio :
+    //   **une liste d'autorisation vide ne refuse pas « tous sauf » — elle refuse TOUT.**
+    if (autorises.size === 0) {
+      // On ne lève pas : le webhook doit rendre `null` (aucune session créée), pas une erreur.
+      // ⚠️ Mais un refus silencieux est un mensonge : si le harnais a un journal, il doit le dire.
+      console.warn('[pont-live] refus fermé : ARKADIA_AUTORISES est vide — aucun compte autorisé');
+      return null;
+    }
+    if (!autorises.has(auteur)) {
       return null; // compte non autorisé
     }
 
